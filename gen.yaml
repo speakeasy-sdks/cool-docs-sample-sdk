@@ -9,6 +9,7 @@ generation:
     disableComments: false
     omitDescriptionIfSummaryPresent: false
   baseServerURL: ""
+  flattenGlobalSecurity: true
   repoURL: https://github.com/speakeasy-sdks/cool-docs-sample-sdk.git
   sdkClassName: Todo-app
   singleTagPerOp: false
