@@ -3,8 +3,8 @@
 from __future__ import annotations
 import dataclasses
 import requests as requests_http
-from ..shared import task as shared_task
-from ..shared import taskinput as shared_taskinput
+from ...models.shared import task as shared_task
+from ...models.shared import taskinput as shared_taskinput
 from typing import Optional
 
 

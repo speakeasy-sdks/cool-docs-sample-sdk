@@ -11,7 +11,7 @@ req = operations.DeleteTasksTaskIDRequest(
     task_id=869857,
 )
 
-res = s.todo_app.delete_tasks_task_id_(req)
+res = s.delete_tasks_task_id_(req)
 
 if res.status_code == 200:
     # handle response

@@ -29,7 +29,7 @@ req = operations.DeleteTasksTaskIDRequest(
     task_id=869857,
 )
 
-res = s.todo_app.delete_tasks_task_id_(req)
+res = s.delete_tasks_task_id_(req)
 
 if res.status_code == 200:
     # handle response
@@ -57,13 +57,12 @@ Get all tasks
 ```python
 import todo_app
 
-
 s = todo_app.TodoApp()
 
 
-res = s.todo_app.get_tasks()
+res = s.get_tasks()
 
-if res.tasks is not None:
+if res.classes is not None:
     # handle response
     pass
 ```
@@ -90,7 +89,7 @@ req = operations.GetTasksTaskIDRequest(
     task_id=507933,
 )
 
-res = s.todo_app.get_tasks_task_id_(req)
+res = s.get_tasks_task_id_(req)
 
 if res.task is not None:
     # handle response
@@ -125,7 +124,7 @@ req = shared.TaskInput(
     title='string',
 )
 
-res = s.todo_app.post_tasks(req)
+res = s.post_tasks(req)
 
 if res.task is not None:
     # handle response
@@ -163,7 +162,7 @@ req = operations.PutTasksTaskIDRequest(
     task_id=401211,
 )
 
-res = s.todo_app.put_tasks_task_id_(req)
+res = s.put_tasks_task_id_(req)
 
 if res.task is not None:
     # handle response

@@ -15,7 +15,7 @@ It has been generated successfully based on your OpenAPI spec. However, it is no
 - [ ] 🎁 Publish your SDK to package managers by [configuring automatic publishing](https://www.speakeasyapi.dev/docs/productionize-sdks/publish-sdks)
 - [ ] ✨ When ready to productionize, delete this section from the README
 <!-- Start SDK Installation -->
-# SDK Installation
+## SDK Installation
 
 ```bash
 pip install git+https://github.com/speakeasy-sdks/cool-docs-sample-sdk.git
@@ -24,8 +24,6 @@ pip install git+https://github.com/speakeasy-sdks/cool-docs-sample-sdk.git
 
 ## SDK Example Usage
 <!-- Start SDK Example Usage -->
-
-
 ```python
 import todo_app
 from todo_app.models import operations
@@ -36,7 +34,7 @@ req = operations.DeleteTasksTaskIDRequest(
     task_id=869857,
 )
 
-res = s.todo_app.delete_tasks_task_id_(req)
+res = s.delete_tasks_task_id_(req)
 
 if res.status_code == 200:
     # handle response
@@ -45,9 +43,9 @@ if res.status_code == 200:
 <!-- End SDK Example Usage -->
 
 <!-- Start SDK Available Operations -->
-# Available Resources and Operations
+## Available Resources and Operations
 
-## [TodoApp SDK](docs/sdks/todoapp/README.md)
+### [TodoApp SDK](docs/sdks/todoapp/README.md)
 
 * [delete_tasks_task_id_](docs/sdks/todoapp/README.md#delete_tasks_task_id_) - Delete a task
 * [get_tasks](docs/sdks/todoapp/README.md#get_tasks) - Get all tasks
@@ -58,16 +56,12 @@ if res.status_code == 200:
 
 <!-- Start Dev Containers -->
 
-
-
 <!-- End Dev Containers -->
 
 <!-- Start Error Handling -->
 # Error Handling
 
 Handling errors in your SDK should largely match your expectations.  All operations return a response object or raise an error.  If Error objects are specified in your OpenAPI Spec, the SDK will raise the appropriate Error type.
-
-
 <!-- End Error Handling -->
 
 <!-- Start Server Selection -->
@@ -83,20 +77,19 @@ You can override the default server globally by passing a server index to the `s
 
 For example:
 
-
 ```python
 import todo_app
 from todo_app.models import operations
 
 s = todo_app.TodoApp(
-    server_idx=0
+    server_idx=0,
 )
 
 req = operations.DeleteTasksTaskIDRequest(
     task_id=869857,
 )
 
-res = s.todo_app.delete_tasks_task_id_(req)
+res = s.delete_tasks_task_id_(req)
 
 if res.status_code == 200:
     # handle response
@@ -108,20 +101,19 @@ if res.status_code == 200:
 
 The default server can also be overridden globally by passing a URL to the `server_url: str` optional parameter when initializing the SDK client instance. For example:
 
-
 ```python
 import todo_app
 from todo_app.models import operations
 
 s = todo_app.TodoApp(
-    server_url="https://api.example.com/todo"
+    server_url="https://api.example.com/todo",
 )
 
 req = operations.DeleteTasksTaskIDRequest(
     task_id=869857,
 )
 
-res = s.todo_app.delete_tasks_task_id_(req)
+res = s.delete_tasks_task_id_(req)
 
 if res.status_code == 200:
     # handle response
@@ -145,8 +137,6 @@ http_client = requests.Session()
 http_client.headers.update({'x-custom-header': 'someValue'})
 s = todo_app.TodoApp(client: http_client)
 ```
-
-
 <!-- End Custom HTTP Client -->
 
 <!-- Placeholder for Future Speakeasy SDK Sections -->
