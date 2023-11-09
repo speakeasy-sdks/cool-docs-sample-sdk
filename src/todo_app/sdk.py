@@ -34,15 +34,14 @@ class TodoApp:
         if client is None:
             client = requests_http.Session()
         
-        security_client = client
-        
         if server_url is not None:
             if url_params is not None:
                 server_url = utils.template_url(server_url, url_params)
 
-        self.sdk_configuration = SDKConfiguration(client, security_client, server_url, server_idx, retry_config=retry_config)
+        self.sdk_configuration = SDKConfiguration(client, None, server_url, server_idx, retry_config=retry_config)
        
         
+    
     
     
     
@@ -69,6 +68,7 @@ class TodoApp:
 
         return res
 
+    
     
     def get_tasks(self) -> operations.GetTasksResponse:
         r"""Get all tasks"""
@@ -98,6 +98,7 @@ class TodoApp:
         return res
 
     
+    
     def get_tasks_task_id_(self, request: operations.GetTasksTaskIDRequest) -> operations.GetTasksTaskIDResponse:
         r"""Get a single task"""
         base_url = utils.template_url(*self.sdk_configuration.get_server_details())
@@ -125,6 +126,7 @@ class TodoApp:
 
         return res
 
+    
     
     def post_tasks(self, request: shared.TaskInput) -> operations.PostTasksResponse:
         r"""Add a new task"""
@@ -158,6 +160,7 @@ class TodoApp:
 
         return res
 
+    
     
     def put_tasks_task_id_(self, request: operations.PutTasksTaskIDRequest) -> operations.PutTasksTaskIDResponse:
         r"""Update a task"""

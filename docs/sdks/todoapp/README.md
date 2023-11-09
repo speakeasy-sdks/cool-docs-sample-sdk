@@ -46,7 +46,11 @@ if res.status_code == 200:
 ### Response
 
 **[operations.DeleteTasksTaskIDResponse](../../models/operations/deletetaskstaskidresponse.md)**
+### Errors
 
+| Error Object    | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 400-600         | */*             |
 
 ## get_tasks
 
@@ -71,7 +75,11 @@ if res.classes is not None:
 ### Response
 
 **[operations.GetTasksResponse](../../models/operations/gettasksresponse.md)**
+### Errors
 
+| Error Object    | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 400-600         | */*             |
 
 ## get_tasks_task_id_
 
@@ -106,7 +114,11 @@ if res.task is not None:
 ### Response
 
 **[operations.GetTasksTaskIDResponse](../../models/operations/gettaskstaskidresponse.md)**
+### Errors
 
+| Error Object    | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 400-600         | */*             |
 
 ## post_tasks
 
@@ -141,7 +153,11 @@ if res.task is not None:
 ### Response
 
 **[operations.PostTasksResponse](../../models/operations/posttasksresponse.md)**
+### Errors
 
+| Error Object    | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 400-600         | */*             |
 
 ## put_tasks_task_id_
 
@@ -179,4 +195,8 @@ if res.task is not None:
 ### Response
 
 **[operations.PutTasksTaskIDResponse](../../models/operations/puttaskstaskidresponse.md)**
+### Errors
 
+| Error Object    | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 400-600         | */*             |
