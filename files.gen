@@ -7,6 +7,7 @@ src/todo_app/utils/__init__.py
 src/todo_app/utils/retries.py
 src/todo_app/utils/utils.py
 src/todo_app/models/errors/sdkerror.py
+tests/helpers.py
 src/todo_app/models/operations/delete_tasks_taskid_.py
 src/todo_app/models/operations/get_tasks.py
 src/todo_app/models/operations/get_tasks_taskid_.py
