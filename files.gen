@@ -19,7 +19,6 @@ src/todo_app/models/__init__.py
 src/todo_app/models/errors/__init__.py
 src/todo_app/models/operations/__init__.py
 src/todo_app/models/shared/__init__.py
-USAGE.md
 docs/models/operations/deletetaskstaskidrequest.md
 docs/models/operations/deletetaskstaskidresponse.md
 docs/models/operations/gettasksresponse.md
@@ -31,4 +30,5 @@ docs/models/operations/puttaskstaskidresponse.md
 docs/models/shared/task.md
 docs/models/shared/taskinput.md
 docs/sdks/todoapp/README.md
+USAGE.md
 .gitattributes
