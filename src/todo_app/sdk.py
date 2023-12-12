@@ -134,7 +134,7 @@ class TodoApp:
         
         url = base_url + '/tasks'
         headers = {}
-        req_content_type, data, form = utils.serialize_request_body(request, "request", False, False, 'json')
+        req_content_type, data, form = utils.serialize_request_body(request, shared.TaskInput, "request", False, False, 'json')
         if req_content_type not in ('multipart/form-data', 'multipart/mixed'):
             headers['content-type'] = req_content_type
         if data is None and form is None:
@@ -168,7 +168,7 @@ class TodoApp:
         
         url = utils.generate_url(operations.PutTasksTaskIDRequest, base_url, '/tasks/{taskId}', request)
         headers = {}
-        req_content_type, data, form = utils.serialize_request_body(request, "task_input", False, False, 'json')
+        req_content_type, data, form = utils.serialize_request_body(request, operations.PutTasksTaskIDRequest, "task_input", False, False, 'json')
         if req_content_type not in ('multipart/form-data', 'multipart/mixed'):
             headers['content-type'] = req_content_type
         if data is None and form is None:
