@@ -1,0 +1,51 @@
+lockVersion: 2.0.0
+id: 8b173044-19c4-46cd-877c-7f012e09f940
+management:
+  docChecksum: 3153595422b45da8915a94784d14b38f
+  docVersion: 1.0.0
+  speakeasyVersion: internal
+  generationVersion: 2.225.2
+  releaseVersion: 0.3.1
+  configChecksum: 8fba47c02a71c57b6d4248e562392ec4
+  repoURL: https://github.com/speakeasy-sdks/cool-docs-sample-sdk.git
+  repoSubDirectory: .
+  installationURL: https://github.com/speakeasy-sdks/cool-docs-sample-sdk.git
+features:
+  python:
+    core: 4.4.0
+    globalServerURLs: 2.82.1
+generatedFiles:
+  - src/todo_app/sdkconfiguration.py
+  - src/todo_app/sdk.py
+  - pylintrc
+  - setup.py
+  - src/todo_app/__init__.py
+  - src/todo_app/utils/__init__.py
+  - src/todo_app/utils/retries.py
+  - src/todo_app/utils/utils.py
+  - src/todo_app/models/errors/sdkerror.py
+  - tests/helpers.py
+  - src/todo_app/models/operations/delete_tasks_taskid_.py
+  - src/todo_app/models/operations/get_tasks.py
+  - src/todo_app/models/operations/get_tasks_taskid_.py
+  - src/todo_app/models/operations/post_tasks.py
+  - src/todo_app/models/operations/put_tasks_taskid_.py
+  - src/todo_app/models/shared/task.py
+  - src/todo_app/models/shared/taskinput.py
+  - src/todo_app/models/__init__.py
+  - src/todo_app/models/errors/__init__.py
+  - src/todo_app/models/operations/__init__.py
+  - src/todo_app/models/shared/__init__.py
+  - docs/models/operations/deletetaskstaskidrequest.md
+  - docs/models/operations/deletetaskstaskidresponse.md
+  - docs/models/operations/gettasksresponse.md
+  - docs/models/operations/gettaskstaskidrequest.md
+  - docs/models/operations/gettaskstaskidresponse.md
+  - docs/models/operations/posttasksresponse.md
+  - docs/models/operations/puttaskstaskidrequest.md
+  - docs/models/operations/puttaskstaskidresponse.md
+  - docs/models/shared/task.md
+  - docs/models/shared/taskinput.md
+  - docs/sdks/todoapp/README.md
+  - USAGE.md
+  - .gitattributes
