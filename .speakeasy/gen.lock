@@ -4,15 +4,15 @@ management:
   docChecksum: 3153595422b45da8915a94784d14b38f
   docVersion: 1.0.0
   speakeasyVersion: internal
-  generationVersion: 2.225.2
-  releaseVersion: 0.3.1
-  configChecksum: 8fba47c02a71c57b6d4248e562392ec4
+  generationVersion: 2.228.1
+  releaseVersion: 0.3.2
+  configChecksum: 4e74e1494388445672087befb09aa886
   repoURL: https://github.com/speakeasy-sdks/cool-docs-sample-sdk.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-sdks/cool-docs-sample-sdk.git
 features:
   python:
-    core: 4.4.0
+    core: 4.4.1
     globalServerURLs: 2.82.1
 generatedFiles:
   - src/todo_app/sdkconfiguration.py
