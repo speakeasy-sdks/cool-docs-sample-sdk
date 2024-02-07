@@ -10,10 +10,10 @@ from typing import Optional
 
 @dataclasses.dataclass
 class PutTasksTaskIDRequest:
-    task_id: int = dataclasses.field(metadata={'path_param': { 'field_name': 'taskId', 'style': 'simple', 'explode': False }})
-    r"""ID of the task to update"""
     task_input: shared_taskinput.TaskInput = dataclasses.field(metadata={'request': { 'media_type': 'application/json' }})
     r"""Task details to update"""
+    task_id: int = dataclasses.field(metadata={'path_param': { 'field_name': 'taskId', 'style': 'simple', 'explode': False }})
+    r"""ID of the task to update"""
     
 
 
@@ -22,10 +22,10 @@ class PutTasksTaskIDRequest:
 class PutTasksTaskIDResponse:
     content_type: str = dataclasses.field()
     r"""HTTP response content type for this operation"""
-    raw_response: requests_http.Response = dataclasses.field()
-    r"""Raw HTTP response; suitable for custom response parsing"""
     status_code: int = dataclasses.field()
     r"""HTTP response status code for this operation"""
+    raw_response: requests_http.Response = dataclasses.field()
+    r"""Raw HTTP response; suitable for custom response parsing"""
     task: Optional[shared_task.Task] = dataclasses.field(default=None)
     r"""Task successfully updated"""
     
