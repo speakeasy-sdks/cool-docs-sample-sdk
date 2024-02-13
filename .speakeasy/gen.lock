@@ -4,7 +4,7 @@ management:
   docChecksum: 3153595422b45da8915a94784d14b38f
   docVersion: 1.0.0
   speakeasyVersion: internal
-  generationVersion: 2.250.12
+  generationVersion: 2.253.0
   releaseVersion: 0.5.0
   configChecksum: b090c2ad367a7e5244032d118fb8eebc
   repoURL: https://github.com/speakeasy-sdks/cool-docs-sample-sdk.git

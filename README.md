@@ -70,7 +70,7 @@ Handling errors in this SDK should largely match your expectations.  All operati
 
 ```python
 import todo_app
-from todo_app.models import operations
+from todo_app.models import errors, operations
 
 s = todo_app.TodoApp()
 
@@ -82,7 +82,7 @@ res = None
 try:
     res = s.delete_tasks_task_id_(req)
 except errors.SDKError as e:
-    print(e)  # handle exception
+    # handle exception
     raise(e)
 
 if res.status_code == 200:
