@@ -133,7 +133,7 @@ from todo_app.models import shared
 s = todo_app.TodoApp()
 
 req = shared.TaskInput(
-    title='string',
+    title='<value>',
 )
 
 res = s.post_tasks(req)
@@ -173,7 +173,7 @@ s = todo_app.TodoApp()
 
 req = operations.PutTasksTaskIDRequest(
     task_input=shared.TaskInput(
-        title='string',
+        title='<value>',
     ),
     task_id=401211,
 )
