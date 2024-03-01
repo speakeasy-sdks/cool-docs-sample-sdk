@@ -3,6 +3,7 @@
 import requests as requests_http
 from .sdkconfiguration import SDKConfiguration
 from todo_app import utils
+from todo_app._hooks import HookContext, SDKHooks
 from todo_app.models import errors, operations, shared
 from typing import Dict, List, Optional
 
@@ -39,6 +40,16 @@ class TodoApp:
                 server_url = utils.template_url(server_url, url_params)
 
         self.sdk_configuration = SDKConfiguration(client, None, server_url, server_idx, retry_config=retry_config)
+
+        hooks = SDKHooks()
+
+        current_server_url, *_ = self.sdk_configuration.get_server_details()
+        server_url, self.sdk_configuration.client = hooks.sdk_init(current_server_url, self.sdk_configuration.client)
+        if current_server_url != server_url:
+            self.sdk_configuration.server_url = server_url
+
+        # pylint: disable=protected-access
+        self.sdk_configuration._hooks=hooks
        
         
     
@@ -47,6 +58,7 @@ class TodoApp:
     
     def delete_tasks_task_id_(self, request: operations.DeleteTasksTaskIDRequest) -> operations.DeleteTasksTaskIDResponse:
         r"""Delete a task"""
+        hook_ctx = HookContext(operation_id='delete_/tasks/{taskId}', oauth2_scopes=[], security_source=None)
         base_url = utils.template_url(*self.sdk_configuration.get_server_details())
         
         url = utils.generate_url(operations.DeleteTasksTaskIDRequest, base_url, '/tasks/{taskId}', request)
@@ -56,7 +68,27 @@ class TodoApp:
         
         client = self.sdk_configuration.client
         
-        http_res = client.request('DELETE', url, headers=headers)
+        
+        try:
+            req = self.sdk_configuration.get_hooks().before_request(
+                hook_ctx, 
+                requests_http.Request('DELETE', url, headers=headers).prepare(),
+            )
+            http_res = client.send(req)
+        except Exception as e:
+            _, e = self.sdk_configuration.get_hooks().after_error(hook_ctx, None, e)
+            raise e
+
+        if utils.match_status_codes(['404','4XX','5XX'], http_res.status_code):
+            http_res, e = self.sdk_configuration.get_hooks().after_error(hook_ctx, http_res, None)
+            if e:
+                raise e
+        else:
+            result = self.sdk_configuration.get_hooks().after_success(hook_ctx, http_res)
+            if isinstance(result, Exception):
+                raise result
+            http_res = result
+        
         content_type = http_res.headers.get('Content-Type')
         
         res = operations.DeleteTasksTaskIDResponse(status_code=http_res.status_code, content_type=content_type, raw_response=http_res)
@@ -72,6 +104,7 @@ class TodoApp:
     
     def get_tasks(self) -> operations.GetTasksResponse:
         r"""Get all tasks"""
+        hook_ctx = HookContext(operation_id='get_/tasks', oauth2_scopes=[], security_source=None)
         base_url = utils.template_url(*self.sdk_configuration.get_server_details())
         
         url = base_url + '/tasks'
@@ -81,7 +114,27 @@ class TodoApp:
         
         client = self.sdk_configuration.client
         
-        http_res = client.request('GET', url, headers=headers)
+        
+        try:
+            req = self.sdk_configuration.get_hooks().before_request(
+                hook_ctx, 
+                requests_http.Request('GET', url, headers=headers).prepare(),
+            )
+            http_res = client.send(req)
+        except Exception as e:
+            _, e = self.sdk_configuration.get_hooks().after_error(hook_ctx, None, e)
+            raise e
+
+        if utils.match_status_codes(['4XX','5XX'], http_res.status_code):
+            http_res, e = self.sdk_configuration.get_hooks().after_error(hook_ctx, http_res, None)
+            if e:
+                raise e
+        else:
+            result = self.sdk_configuration.get_hooks().after_success(hook_ctx, http_res)
+            if isinstance(result, Exception):
+                raise result
+            http_res = result
+        
         content_type = http_res.headers.get('Content-Type')
         
         res = operations.GetTasksResponse(status_code=http_res.status_code, content_type=content_type, raw_response=http_res)
@@ -101,6 +154,7 @@ class TodoApp:
     
     def get_tasks_task_id_(self, request: operations.GetTasksTaskIDRequest) -> operations.GetTasksTaskIDResponse:
         r"""Get a single task"""
+        hook_ctx = HookContext(operation_id='get_/tasks/{taskId}', oauth2_scopes=[], security_source=None)
         base_url = utils.template_url(*self.sdk_configuration.get_server_details())
         
         url = utils.generate_url(operations.GetTasksTaskIDRequest, base_url, '/tasks/{taskId}', request)
@@ -110,7 +164,27 @@ class TodoApp:
         
         client = self.sdk_configuration.client
         
-        http_res = client.request('GET', url, headers=headers)
+        
+        try:
+            req = self.sdk_configuration.get_hooks().before_request(
+                hook_ctx, 
+                requests_http.Request('GET', url, headers=headers).prepare(),
+            )
+            http_res = client.send(req)
+        except Exception as e:
+            _, e = self.sdk_configuration.get_hooks().after_error(hook_ctx, None, e)
+            raise e
+
+        if utils.match_status_codes(['404','4XX','5XX'], http_res.status_code):
+            http_res, e = self.sdk_configuration.get_hooks().after_error(hook_ctx, http_res, None)
+            if e:
+                raise e
+        else:
+            result = self.sdk_configuration.get_hooks().after_success(hook_ctx, http_res)
+            if isinstance(result, Exception):
+                raise result
+            http_res = result
+        
         content_type = http_res.headers.get('Content-Type')
         
         res = operations.GetTasksTaskIDResponse(status_code=http_res.status_code, content_type=content_type, raw_response=http_res)
@@ -130,12 +204,13 @@ class TodoApp:
     
     def post_tasks(self, request: shared.TaskInput) -> operations.PostTasksResponse:
         r"""Add a new task"""
+        hook_ctx = HookContext(operation_id='post_/tasks', oauth2_scopes=[], security_source=None)
         base_url = utils.template_url(*self.sdk_configuration.get_server_details())
         
         url = base_url + '/tasks'
         headers = {}
         req_content_type, data, form = utils.serialize_request_body(request, shared.TaskInput, "request", False, False, 'json')
-        if req_content_type not in ('multipart/form-data', 'multipart/mixed'):
+        if req_content_type is not None and req_content_type not in ('multipart/form-data', 'multipart/mixed'):
             headers['content-type'] = req_content_type
         if data is None and form is None:
             raise Exception('request body is required')
@@ -144,7 +219,27 @@ class TodoApp:
         
         client = self.sdk_configuration.client
         
-        http_res = client.request('POST', url, data=data, files=form, headers=headers)
+        
+        try:
+            req = self.sdk_configuration.get_hooks().before_request(
+                hook_ctx, 
+                requests_http.Request('POST', url, data=data, files=form, headers=headers).prepare(),
+            )
+            http_res = client.send(req)
+        except Exception as e:
+            _, e = self.sdk_configuration.get_hooks().after_error(hook_ctx, None, e)
+            raise e
+
+        if utils.match_status_codes(['4XX','5XX'], http_res.status_code):
+            http_res, e = self.sdk_configuration.get_hooks().after_error(hook_ctx, http_res, None)
+            if e:
+                raise e
+        else:
+            result = self.sdk_configuration.get_hooks().after_success(hook_ctx, http_res)
+            if isinstance(result, Exception):
+                raise result
+            http_res = result
+        
         content_type = http_res.headers.get('Content-Type')
         
         res = operations.PostTasksResponse(status_code=http_res.status_code, content_type=content_type, raw_response=http_res)
@@ -164,12 +259,13 @@ class TodoApp:
     
     def put_tasks_task_id_(self, request: operations.PutTasksTaskIDRequest) -> operations.PutTasksTaskIDResponse:
         r"""Update a task"""
+        hook_ctx = HookContext(operation_id='put_/tasks/{taskId}', oauth2_scopes=[], security_source=None)
         base_url = utils.template_url(*self.sdk_configuration.get_server_details())
         
         url = utils.generate_url(operations.PutTasksTaskIDRequest, base_url, '/tasks/{taskId}', request)
         headers = {}
         req_content_type, data, form = utils.serialize_request_body(request, operations.PutTasksTaskIDRequest, "task_input", False, False, 'json')
-        if req_content_type not in ('multipart/form-data', 'multipart/mixed'):
+        if req_content_type is not None and req_content_type not in ('multipart/form-data', 'multipart/mixed'):
             headers['content-type'] = req_content_type
         if data is None and form is None:
             raise Exception('request body is required')
@@ -178,7 +274,27 @@ class TodoApp:
         
         client = self.sdk_configuration.client
         
-        http_res = client.request('PUT', url, data=data, files=form, headers=headers)
+        
+        try:
+            req = self.sdk_configuration.get_hooks().before_request(
+                hook_ctx, 
+                requests_http.Request('PUT', url, data=data, files=form, headers=headers).prepare(),
+            )
+            http_res = client.send(req)
+        except Exception as e:
+            _, e = self.sdk_configuration.get_hooks().after_error(hook_ctx, None, e)
+            raise e
+
+        if utils.match_status_codes(['404','4XX','5XX'], http_res.status_code):
+            http_res, e = self.sdk_configuration.get_hooks().after_error(hook_ctx, http_res, None)
+            if e:
+                raise e
+        else:
+            result = self.sdk_configuration.get_hooks().after_success(hook_ctx, http_res)
+            if isinstance(result, Exception):
+                raise result
+            http_res = result
+        
         content_type = http_res.headers.get('Content-Type')
         
         res = operations.PutTasksTaskIDResponse(status_code=http_res.status_code, content_type=content_type, raw_response=http_res)
