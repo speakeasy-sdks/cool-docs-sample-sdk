@@ -31,9 +31,10 @@ req = operations.DeleteTasksTaskIDRequest(
 
 res = s.delete_tasks_task_id_(req)
 
-if res.status_code == 200:
+if res is not None:
     # handle response
     pass
+
 ```
 
 ### Parameters
@@ -69,6 +70,7 @@ res = s.get_tasks()
 if res.classes is not None:
     # handle response
     pass
+
 ```
 
 
@@ -102,6 +104,7 @@ res = s.get_tasks_task_id_(req)
 if res.task is not None:
     # handle response
     pass
+
 ```
 
 ### Parameters
@@ -141,6 +144,7 @@ res = s.post_tasks(req)
 if res.task is not None:
     # handle response
     pass
+
 ```
 
 ### Parameters
@@ -183,6 +187,7 @@ res = s.put_tasks_task_id_(req)
 if res.task is not None:
     # handle response
     pass
+
 ```
 
 ### Parameters
